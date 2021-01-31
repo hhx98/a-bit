@@ -10,6 +10,7 @@ export default function parseTemplateToTokens(templateStr) {
   while (!scanner.eos()) {
     words = scanner.scanUntil("{{");
     if (words !== "") {
+      // TODO: 去掉空格
       tokens.push(["text", words]);
     }
     scanner.scan("{{");

@@ -1,0 +1,18 @@
+import lookup from "./lookup";
+import renderTemplate from "./renderTemplate";
+
+// 处理数组结合renderTemplate实现递归
+export default function parseArray(token, data) {
+  let v = lookup(data, token[1]);
+  console.log(token)
+
+  let resultStr = "";
+  // 遍历v数组
+  for (let i = 0; i < v.length; i++) {
+    resultStr += renderTemplate(token[2], {
+      ...v[i],
+      ".": v[i],
+    });
+  }
+  return resultStr;
+}

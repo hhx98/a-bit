@@ -6,29 +6,44 @@
   </head>
   <body>
     <h1>Hello</h1>
+    <div id="container"></div>
     <script src="/xuni/bundle.js"></script>
     <script>
-      const templateStr = `
+      let templateStr = `
 <div>
     <ol>
         {{#students}}
         <li>
-            学生{{item.name}}的爱好是
+            学生{{name}}的爱好是
             <ol>
-                {{#item.hobbies}}
+                {{#hobbies}}
                     <li>{{.}}</li>
-                {{/item.hobbies}}
+                {{/hobbies}}
             </ol>
         </li>
         {{/students}}
     </ol>
 </div>
       `;
-      const data = {
-        thing: "",
-        mood: "",
+      let data = {
+        students: [
+          { name: "小明", hobbies: ["游泳", "健身"] },
+          { name: "小红", hobbies: ["足球", "篮球"] },
+        ],
       };
-      HTemplate.render(templateStr, data);
+
+      // templateStr = `I Love {{somebody}},Score: {{a.b.c}}`;
+      // data = {
+      //   somebody: "Andy",
+      //   a: {
+      //     b: {
+      //       c: 2021,
+      //     },
+      //   },
+      // };
+      const domStr = HTemplate.render(templateStr, data);
+      console.log(domStr)
+      document.getElementById('container').innerHTML = domStr
     </script>
   </body>
 </html>
